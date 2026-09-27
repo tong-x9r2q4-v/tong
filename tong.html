@@ -1,0 +1,5021 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 検索エンジンへの登録を抑制 -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+
+<meta name="description" content="Tong — すべてをつかみ、未来を守る。Privacy First / Security First のテクノロジープロジェクト。">
+
+<meta name="theme-color" content="#050505">
+
+<title>Tong — すべてをつかみ、未来を守る。</title>
+
+<style>
+
+:root{
+  --bg:#050505;
+  --bg2:#0b0b0d;
+  --card:rgba(255,255,255,.055);
+  --card2:rgba(255,255,255,.08);
+  --text:#f5f5f7;
+  --muted:#a1a1a6;
+  --line:rgba(255,255,255,.11);
+  --accent:#ffffff;
+  --blue:#6ea8ff;
+  --cyan:#55e6ff;
+  --purple:#9b7cff;
+  --green:#5cffae;
+  --shadow:0 30px 90px rgba(0,0,0,.45);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Helvetica Neue",
+    "Noto Sans JP",
+    Arial,
+    sans-serif;
+
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition:.4s ease;
+}
+
+body.light{
+  --bg:#f5f5f7;
+  --bg2:#ffffff;
+  --card:rgba(0,0,0,.045);
+  --card2:rgba(0,0,0,.07);
+  --text:#111;
+  --muted:#666;
+  --line:rgba(0,0,0,.1);
+  --accent:#111;
+  --shadow:0 30px 90px rgba(0,0,0,.12);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:var(--bg);
+}
+
+::-webkit-scrollbar-thumb{
+  background:#444;
+  border-radius:999px;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+.loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#000;
+  transition:opacity .8s ease,visibility .8s ease;
+}
+
+.loader.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.loader-logo{
+  font-size:clamp(60px,12vw,150px);
+  font-weight:800;
+  letter-spacing:-.08em;
+
+  background:
+    linear-gradient(
+      120deg,
+      #fff,
+      #888,
+      #fff
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+
+  animation:pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse{
+  from{
+    opacity:.45;
+    transform:scale(.97);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background-glow{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+  overflow:hidden;
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.18;
+}
+
+.orb.one{
+  width:420px;
+  height:420px;
+  background:#674cff;
+  top:5%;
+  left:8%;
+}
+
+.orb.two{
+  width:380px;
+  height:380px;
+  background:#00cfff;
+  top:45%;
+  right:5%;
+}
+
+.orb.three{
+  width:500px;
+  height:500px;
+  background:#ffffff;
+  bottom:-20%;
+  left:35%;
+  opacity:.05;
+}
+
+.grid-bg{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  opacity:.18;
+
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+
+  background-size:80px 80px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent 75%
+    );
+}
+
+/* =========================
+   NAV
+========================= */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+
+  height:68px;
+
+  z-index:1000;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 5%;
+
+  background:rgba(5,5,5,.65);
+
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+
+  border-bottom:1px solid var(--line);
+}
+
+body.light nav{
+  background:rgba(245,245,247,.72);
+}
+
+.logo{
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-.07em;
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+  align-items:center;
+  list-style:none;
+}
+
+.nav-links a{
+  color:var(--muted);
+  font-size:14px;
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  color:var(--text);
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.icon-btn{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+
+  border:1px solid var(--line);
+
+  background:var(--card);
+  color:var(--text);
+
+  display:grid;
+  place-items:center;
+
+  transition:.25s;
+}
+
+.icon-btn:hover{
+  transform:translateY(-2px);
+  background:var(--card2);
+}
+
+.mobile-menu{
+  display:none;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:100vh;
+
+  padding:
+    150px
+    6%
+    80px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  position:relative;
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:8px 14px;
+
+  border:1px solid var(--line);
+  background:var(--card);
+
+  border-radius:999px;
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin-bottom:28px;
+
+  backdrop-filter:blur(10px);
+}
+
+.dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 15px var(--green);
+}
+
+.hero h1{
+  font-size:
+    clamp(
+      90px,
+      20vw,
+      260px
+    );
+
+  line-height:.78;
+
+  letter-spacing:-.095em;
+
+  font-weight:850;
+
+  margin-left:-.07em;
+
+  background:
+    linear-gradient(
+      120deg,
+      #fff 0%,
+      #aaa 28%,
+      #fff 50%,
+      #7e68ff 72%,
+      #50dfff 100%
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
+
+  background-size:220%;
+
+  animation:
+    gradientMove 7s ease infinite;
+}
+
+@keyframes gradientMove{
+
+  0%,
+  100%{
+    background-position:0%;
+  }
+
+  50%{
+    background-position:100%;
+  }
+
+}
+
+.hero-subtitle{
+  margin-top:45px;
+
+  font-size:
+    clamp(
+      28px,
+      4vw,
+      58px
+    );
+
+  font-weight:700;
+
+  letter-spacing:-.05em;
+}
+
+.hero-description{
+  max-width:720px;
+
+  margin:
+    24px
+    auto
+    0;
+
+  color:var(--muted);
+
+  font-size:18px;
+
+  line-height:1.9;
+}
+
+.hero-buttons{
+  display:flex;
+
+  gap:12px;
+
+  margin-top:38px;
+
+  flex-wrap:wrap;
+
+  justify-content:center;
+}
+
+.btn{
+  border:none;
+
+  border-radius:999px;
+
+  padding:
+    14px
+    23px;
+
+  font-weight:600;
+
+  transition:.25s;
+}
+
+.btn-primary{
+  background:#fff;
+  color:#000;
+}
+
+body.light .btn-primary{
+  background:#111;
+  color:#fff;
+}
+
+.btn-secondary{
+  background:var(--card);
+
+  border:1px solid var(--line);
+
+  color:var(--text);
+}
+
+.btn:hover{
+  transform:
+    translateY(-3px)
+    scale(1.02);
+}
+
+.hero-scroll{
+  position:absolute;
+
+  bottom:30px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  letter-spacing:.12em;
+
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+
+  0%,
+  100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(8px);
+  }
+
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+  padding:120px 6%;
+
+  max-width:1500px;
+
+  margin:auto;
+}
+
+.section-label{
+  color:var(--muted);
+
+  text-transform:uppercase;
+
+  letter-spacing:.16em;
+
+  font-size:12px;
+
+  margin-bottom:18px;
+}
+
+.section-title{
+  font-size:
+    clamp(
+      42px,
+      6vw,
+      80px
+    );
+
+  line-height:1;
+
+  letter-spacing:-.06em;
+
+  max-width:900px;
+}
+
+.section-description{
+  color:var(--muted);
+
+  max-width:700px;
+
+  font-size:17px;
+
+  line-height:1.9;
+
+  margin-top:25px;
+}
+
+/* =========================
+   VALUES
+========================= */
+
+.values-grid{
+  margin-top:70px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:16px;
+}
+
+.value-card{
+  min-height:280px;
+
+  padding:30px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--card),
+      transparent
+    );
+
+  position:relative;
+
+  overflow:hidden;
+
+  transition:.35s;
+}
+
+.value-card:hover{
+  transform:translateY(-8px);
+
+  border-color:
+    rgba(255,255,255,.25);
+}
+
+.value-icon{
+  font-size:36px;
+
+  margin-bottom:50px;
+}
+
+.value-card h3{
+  font-size:24px;
+
+  margin-bottom:12px;
+}
+
+.value-card p{
+  color:var(--muted);
+
+  line-height:1.7;
+
+  font-size:14px;
+}
+
+/* =========================
+   NAME
+========================= */
+
+.name-section{
+  text-align:center;
+}
+
+.name-meaning{
+  margin-top:65px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:20px;
+
+  text-align:left;
+}
+
+.meaning-card{
+  padding:45px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:32px;
+
+  background:var(--card);
+}
+
+.meaning-number{
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin-bottom:30px;
+}
+
+.meaning-card h3{
+  font-size:32px;
+
+  margin-bottom:15px;
+}
+
+.meaning-card p{
+  color:var(--muted);
+
+  line-height:1.8;
+}
+
+/* =========================
+   FOUNDER
+========================= */
+
+.founder{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1.3fr;
+
+  gap:50px;
+
+  align-items:center;
+}
+
+.founder-card{
+  min-height:450px;
+
+  border-radius:36px;
+
+  border:
+    1px solid var(--line);
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(126,104,255,.3),
+      transparent 35%
+    ),
+    var(--card);
+
+  display:flex;
+
+  align-items:flex-end;
+
+  padding:40px;
+
+  overflow:hidden;
+
+  position:relative;
+}
+
+.founder-card::before{
+  content:"T";
+
+  position:absolute;
+
+  font-size:420px;
+
+  font-weight:900;
+
+  line-height:1;
+
+  right:-50px;
+
+  top:-50px;
+
+  color:
+    rgba(255,255,255,.025);
+}
+
+.founder-name{
+  position:relative;
+
+  z-index:2;
+}
+
+.founder-name small{
+  color:var(--muted);
+
+  display:block;
+
+  margin-bottom:8px;
+}
+
+.founder-name h3{
+  font-size:42px;
+
+  letter-spacing:-.05em;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:15px;
+
+  margin-top:55px;
+}
+
+.stat{
+  text-align:center;
+
+  padding:30px 15px;
+
+  border-top:
+    1px solid var(--line);
+}
+
+.stat strong{
+  display:block;
+
+  font-size:45px;
+
+  letter-spacing:-.06em;
+}
+
+.stat span{
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+/* =========================
+   SECURITY
+========================= */
+
+.security-hero{
+  border:
+    1px solid var(--line);
+
+  border-radius:42px;
+
+  padding:70px;
+
+  background:
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(85,230,255,.13),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 30% 80%,
+      rgba(155,124,255,.14),
+      transparent 35%
+    ),
+    var(--card);
+
+  overflow:hidden;
+}
+
+.security-grid{
+  margin-top:55px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
+}
+
+.security-item{
+  padding:28px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:25px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+.security-item h3{
+  margin:
+    14px
+    0
+    10px;
+
+  font-size:20px;
+}
+
+.security-item p{
+  color:var(--muted);
+
+  line-height:1.7;
+
+  font-size:14px;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.product-toolbar{
+  margin-top:50px;
+
+  display:flex;
+
+  gap:12px;
+
+  flex-wrap:wrap;
+
+  align-items:center;
+
+  justify-content:space-between;
+}
+
+.filters{
+  display:flex;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+}
+
+.filter{
+  border:
+    1px solid var(--line);
+
+  background:var(--card);
+
+  color:var(--muted);
+
+  padding:
+    9px
+    15px;
+
+  border-radius:999px;
+
+  transition:.2s;
+}
+
+.filter.active,
+.filter:hover{
+  background:var(--text);
+
+  color:var(--bg);
+}
+
+.search-box{
+  min-width:250px;
+
+  padding:
+    12px
+    16px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:999px;
+
+  background:var(--card);
+
+  color:var(--text);
+
+  outline:none;
+}
+
+.search-box::placeholder{
+  color:var(--muted);
+}
+
+.products-grid{
+  margin-top:25px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:14px;
+}
+
+.product-card{
+  min-height:240px;
+
+  padding:25px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--card),
+      rgba(255,255,255,.015)
+    );
+
+  transition:
+    transform .25s,
+    border-color .25s,
+    background .25s;
+
+  cursor:pointer;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.product-card:hover{
+  transform:translateY(-7px);
+
+  border-color:
+    rgba(255,255,255,.3);
+
+  background:var(--card2);
+}
+
+.product-icon{
+  font-size:32px;
+}
+
+.product-card h3{
+  margin-top:45px;
+
+  font-size:22px;
+}
+
+.product-card p{
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin-top:8px;
+
+  line-height:1.6;
+}
+
+.product-tag{
+  position:absolute;
+
+  top:20px;
+
+  right:20px;
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  padding:
+    5px
+    8px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:999px;
+}
+
+/* =========================
+   TONG PHONE
+========================= */
+
+.phone-section{
+  position:relative;
+}
+
+.phone-intro{
+  max-width:850px;
+}
+
+.phone-intro h2{
+  font-size:
+    clamp(
+      55px,
+      9vw,
+      125px
+    );
+
+  line-height:.9;
+
+  letter-spacing:-.075em;
+}
+
+.phone-intro p{
+  max-width:700px;
+
+  color:var(--muted);
+
+  font-size:19px;
+
+  line-height:1.9;
+
+  margin-top:30px;
+}
+
+.phone-showcase{
+  margin-top:70px;
+
+  min-height:680px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:45px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  background:
+    radial-gradient(
+      circle at 75% 20%,
+      rgba(80,223,255,.24),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 35% 70%,
+      rgba(126,104,255,.23),
+      transparent 32%
+    ),
+    #07080d;
+}
+
+.phone-copy{
+  position:absolute;
+
+  left:70px;
+
+  top:80px;
+
+  z-index:5;
+
+  max-width:530px;
+}
+
+.phone-copy h3{
+  font-size:
+    clamp(
+      55px,
+      7vw,
+      100px
+    );
+
+  line-height:.9;
+
+  letter-spacing:-.07em;
+}
+
+.phone-copy p{
+  color:#aaa;
+
+  line-height:1.85;
+
+  margin-top:25px;
+}
+
+.phone{
+  position:absolute;
+
+  width:310px;
+
+  height:610px;
+
+  border:
+    9px solid #171719;
+
+  border-radius:52px;
+
+  right:16%;
+
+  top:45px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #151722,
+      #020305
+    );
+
+  box-shadow:
+    0 50px 120px
+    rgba(0,0,0,.7);
+
+  transform:
+    rotate(7deg);
+
+  transition:
+    transform .5s;
+}
+
+.phone:hover{
+  transform:
+    rotate(2deg)
+    translateY(-10px);
+}
+
+.phone::before{
+  content:"";
+
+  position:absolute;
+
+  width:105px;
+
+  height:27px;
+
+  background:#050505;
+
+  border-radius:
+    0
+    0
+    20px
+    20px;
+
+  left:50%;
+
+  transform:
+    translateX(-50%);
+
+  top:-2px;
+
+  z-index:5;
+}
+
+.phone-screen{
+  position:absolute;
+
+  inset:9px;
+
+  border-radius:42px;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      #5d55ff,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      #16cde5,
+      transparent 35%
+    ),
+    #080910;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  overflow:hidden;
+}
+
+.phone-screen::after{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.13),
+      transparent 35%
+    );
+}
+
+.phone-screen span{
+  font-size:90px;
+
+  font-weight:800;
+
+  letter-spacing:-.1em;
+
+  z-index:2;
+}
+
+/* PHONE FEATURES */
+
+.phone-features{
+  margin-top:25px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:12px;
+
+  max-width:650px;
+}
+
+.phone-feature{
+  padding:20px;
+
+  border:
+    1px solid rgba(255,255,255,.1);
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.04);
+}
+
+.phone-feature strong{
+  display:block;
+
+  font-size:16px;
+
+  margin-bottom:7px;
+}
+
+.phone-feature span{
+  color:#999;
+
+  font-size:13px;
+
+  line-height:1.6;
+}
+
+/* PHONE DETAIL */
+
+.phone-detail-grid{
+  margin-top:80px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
+}
+
+.phone-detail-card{
+  padding:32px;
+
+  min-height:270px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:30px;
+
+  background:var(--card);
+
+  transition:.3s;
+}
+
+.phone-detail-card:hover{
+  transform:translateY(-6px);
+
+  background:var(--card2);
+}
+
+.phone-detail-icon{
+  font-size:35px;
+
+  margin-bottom:35px;
+}
+
+.phone-detail-card h3{
+  font-size:23px;
+
+  margin-bottom:12px;
+}
+
+.phone-detail-card p{
+  color:var(--muted);
+
+  line-height:1.8;
+
+  font-size:14px;
+}
+
+/* PHONE PRINCIPLES */
+
+.phone-principles{
+  margin-top:80px;
+
+  padding:
+    55px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:35px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--card),
+      transparent
+    );
+}
+
+.principle-row{
+  display:grid;
+
+  grid-template-columns:
+    180px
+    1fr;
+
+  gap:35px;
+
+  padding:
+    25px
+    0;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.principle-row:last-child{
+  border-bottom:none;
+}
+
+.principle-row strong{
+  font-size:17px;
+}
+
+.principle-row p{
+  color:var(--muted);
+
+  line-height:1.8;
+}
+
+/* =========================
+   OS
+========================= */
+
+.os-window{
+  margin-top:60px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  box-shadow:var(--shadow);
+
+  background:#0d0e12;
+}
+
+.os-top{
+  height:50px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:0 18px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.08);
+}
+
+.window-dot{
+  width:11px;
+
+  height:11px;
+
+  border-radius:50%;
+
+  background:#555;
+}
+
+.os-body{
+  min-height:480px;
+
+  display:grid;
+
+  grid-template-columns:
+    210px
+    1fr;
+}
+
+.os-sidebar{
+  border-right:
+    1px solid rgba(255,255,255,.08);
+
+  padding:25px;
+}
+
+.os-sidebar div{
+  padding:
+    11px
+    12px;
+
+  border-radius:10px;
+
+  color:#aaa;
+
+  margin-bottom:5px;
+}
+
+.os-sidebar div:first-child{
+  background:
+    rgba(255,255,255,.08);
+
+  color:white;
+}
+
+.os-content{
+  padding:40px;
+}
+
+.os-content h3{
+  font-size:40px;
+}
+
+.os-content p{
+  color:#999;
+
+  margin-top:10px;
+}
+
+.os-cards{
+  margin-top:35px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:12px;
+}
+
+.os-mini{
+  height:130px;
+
+  border-radius:18px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  padding:20px;
+}
+
+/* =========================
+   AI
+========================= */
+
+.ai-box{
+  margin-top:60px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:35px;
+
+  padding:30px;
+
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(155,124,255,.18),
+      transparent 30%
+    ),
+    var(--card);
+}
+
+.ai-response{
+  min-height:230px;
+
+  border-radius:25px;
+
+  background:#050505;
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  padding:25px;
+
+  margin-bottom:18px;
+}
+
+.ai-label{
+  color:#aaa;
+
+  font-size:12px;
+
+  margin-bottom:15px;
+}
+
+.ai-output{
+  font-size:20px;
+
+  line-height:1.7;
+}
+
+.ai-input-row{
+  display:flex;
+
+  gap:10px;
+}
+
+.ai-input{
+  flex:1;
+
+  padding:
+    15px
+    18px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:999px;
+
+  background:var(--card);
+
+  color:var(--text);
+
+  outline:none;
+}
+
+/* =========================
+   STORE
+========================= */
+
+.store{
+  border:
+    1px solid var(--line);
+
+  border-radius:42px;
+
+  padding:70px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255,255,255,.1),
+      transparent 35%
+    ),
+    var(--card);
+}
+
+.store-sign{
+  font-size:
+    clamp(
+      60px,
+      10vw,
+      130px
+    );
+
+  letter-spacing:-.08em;
+
+  font-weight:850;
+
+  text-align:center;
+}
+
+.store-sub{
+  text-align:center;
+
+  color:var(--muted);
+
+  margin-top:15px;
+}
+
+.store-items{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
+
+  margin-top:50px;
+}
+
+.store-item{
+  min-height:220px;
+
+  padding:28px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:25px;
+
+  background:
+    rgba(255,255,255,.035);
+}
+
+.store-item h3{
+  margin-top:35px;
+}
+
+.store-item p{
+  color:var(--muted);
+
+  margin-top:8px;
+
+  font-size:14px;
+}
+
+/* =========================
+   ROADMAP
+========================= */
+
+.timeline{
+  margin-top:70px;
+
+  border-left:
+    1px solid var(--line);
+
+  margin-left:20px;
+}
+
+.timeline-item{
+  padding:
+    0
+    0
+    55px
+    40px;
+
+  position:relative;
+}
+
+.timeline-item::before{
+  content:"";
+
+  position:absolute;
+
+  width:12px;
+
+  height:12px;
+
+  border-radius:50%;
+
+  background:var(--text);
+
+  left:-6px;
+
+  top:5px;
+}
+
+.timeline-item span{
+  color:var(--muted);
+
+  font-size:12px;
+
+  letter-spacing:.12em;
+}
+
+.timeline-item h3{
+  font-size:30px;
+
+  margin:
+    10px
+    0;
+}
+
+.timeline-item p{
+  color:var(--muted);
+
+  line-height:1.7;
+}
+
+/* =========================
+   DEVELOPER
+========================= */
+
+.dev-grid{
+  margin-top:60px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
+}
+
+.dev-card{
+  padding:35px;
+
+  border-radius:28px;
+
+  border:
+    1px solid var(--line);
+
+  background:var(--card);
+}
+
+.dev-card h3{
+  margin:
+    20px
+    0
+    10px;
+}
+
+.dev-card p{
+  color:var(--muted);
+
+  line-height:1.7;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  margin-top:100px;
+
+  border-top:
+    1px solid var(--line);
+
+  padding:
+    70px
+    6%
+    35px;
+}
+
+.footer-top{
+  display:grid;
+
+  grid-template-columns:
+    2fr
+    repeat(3,1fr);
+
+  gap:40px;
+}
+
+.footer-brand{
+  font-size:45px;
+
+  font-weight:800;
+
+  letter-spacing:-.07em;
+}
+
+.footer-description{
+  color:var(--muted);
+
+  max-width:350px;
+
+  line-height:1.7;
+
+  margin-top:18px;
+}
+
+.footer-col h4{
+  margin-bottom:17px;
+}
+
+.footer-col a{
+  display:block;
+
+  color:var(--muted);
+
+  font-size:14px;
+
+  margin:11px 0;
+}
+
+.footer-col a:hover{
+  color:var(--text);
+}
+
+.footer-bottom{
+  margin-top:70px;
+
+  padding-top:20px;
+
+  border-top:
+    1px solid var(--line);
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:20px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+
+  inset:0;
+
+  z-index:3000;
+
+  background:
+    rgba(0,0,0,.7);
+
+  backdrop-filter:blur(15px);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:min(
+    650px,
+    100%
+  );
+
+  max-height:85vh;
+
+  overflow:auto;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:32px;
+
+  background:var(--bg2);
+
+  padding:35px;
+
+  position:relative;
+
+  box-shadow:var(--shadow);
+}
+
+.modal-close{
+  position:absolute;
+
+  top:18px;
+
+  right:18px;
+}
+
+.modal-icon{
+  font-size:55px;
+}
+
+.modal-card h2{
+  margin-top:20px;
+
+  font-size:42px;
+
+  letter-spacing:-.05em;
+}
+
+.modal-card p{
+  color:var(--muted);
+
+  line-height:1.8;
+
+  margin-top:18px;
+}
+
+.modal-meta{
+  margin-top:25px;
+
+  display:flex;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+}
+
+.modal-meta span{
+  border:
+    1px solid var(--line);
+
+  border-radius:999px;
+
+  padding:
+    7px
+    11px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+  opacity:0;
+
+  transform:
+    translateY(35px);
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+
+  transform:none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+  .values-grid,
+  .products-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .security-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .stats{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .phone{
+    right:6%;
+
+    opacity:.45;
+  }
+
+  .phone-detail-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:800px){
+
+  nav{
+    padding:0 20px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .mobile-menu{
+    display:grid;
+  }
+
+  section{
+    padding:
+      85px
+      20px;
+  }
+
+  .hero{
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  .hero h1{
+    font-size:28vw;
+  }
+
+  .values-grid,
+  .products-grid,
+  .security-grid,
+  .store-items,
+  .dev-grid,
+  .phone-detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .name-meaning{
+    grid-template-columns:1fr;
+  }
+
+  .founder{
+    grid-template-columns:1fr;
+  }
+
+  .security-hero,
+  .store{
+    padding:
+      35px
+      25px;
+
+    border-radius:30px;
+  }
+
+  .phone-showcase{
+    min-height:900px;
+
+    border-radius:30px;
+  }
+
+  .phone-copy{
+    left:25px;
+    right:25px;
+    top:40px;
+  }
+
+  .phone{
+    width:230px;
+    height:450px;
+
+    right:50%;
+    transform:
+      translateX(50%)
+      rotate(5deg);
+
+    top:auto;
+    bottom:-45px;
+  }
+
+  .phone:hover{
+    transform:
+      translateX(50%)
+      rotate(2deg);
+  }
+
+  .phone-features{
+    grid-template-columns:1fr;
+  }
+
+  .phone-principles{
+    padding:30px 20px;
+  }
+
+  .principle-row{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .os-body{
+    grid-template-columns:1fr;
+  }
+
+  .os-sidebar{
+    display:none;
+  }
+
+  .os-cards{
+    grid-template-columns:1fr;
+  }
+
+  .ai-input-row{
+    flex-direction:column;
+  }
+
+  .footer-top{
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .values-grid,
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .footer-top{
+    grid-template-columns:1fr;
+  }
+
+  .hero-subtitle{
+    font-size:30px;
+  }
+
+  .hero-description{
+    font-size:15px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+  <div class="loader-logo">Tong</div>
+</div>
+
+<div class="background-glow">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+</div>
+
+<div class="grid-bg"></div>
+
+
+<!-- =========================
+     NAV
+========================= -->
+
+<nav>
+
+  <a href="#top" class="logo">
+    Tong
+  </a>
+
+  <ul class="nav-links">
+
+    <li>
+      <a href="#about">
+        About
+      </a>
+    </li>
+
+    <li>
+      <a href="#products">
+        Products
+      </a>
+    </li>
+
+    <li>
+      <a href="#security">
+        Security
+      </a>
+    </li>
+
+    <li>
+      <a href="#ai">
+        AI
+      </a>
+    </li>
+
+    <li>
+      <a href="#hardware">
+        Phone
+      </a>
+    </li>
+
+    <li>
+      <a href="#future">
+        Future
+      </a>
+    </li>
+
+  </ul>
+
+  <div class="nav-actions">
+
+    <button
+      class="icon-btn"
+      id="themeBtn"
+      title="テーマ切替">
+      ☼
+    </button>
+
+    <button
+      class="icon-btn mobile-menu"
+      onclick="scrollToSection('products')">
+      ☰
+    </button>
+
+  </div>
+
+</nav>
+
+
+<main id="top">
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="hero-badge">
+
+    <span class="dot"></span>
+
+    Tong Technology Project
+
+  </div>
+
+  <h1>
+    Tong
+  </h1>
+
+  <h2 class="hero-subtitle">
+    すべてをつかみ、未来を守る。
+  </h2>
+
+  <p class="hero-description">
+
+    情報をつかむ。未来をつかむ。<br>
+
+    そして、ウイルスや脅威をつかみ取り、
+    ユーザーを守る。<br>
+
+    プライバシーとセキュリティを中心に、
+    未来のテクノロジーをつくる。
+
+  </p>
+
+  <div class="hero-buttons">
+
+    <button
+      class="btn btn-primary"
+      onclick="scrollToSection('products')">
+
+      製品を見る
+
+    </button>
+
+    <button
+      class="btn btn-secondary"
+      onclick="scrollToSection('about')">
+
+      Tongについて
+
+    </button>
+
+  </div>
+
+  <div class="hero-scroll">
+    SCROLL ↓
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section
+  id="about"
+  class="reveal">
+
+  <div class="section-label">
+    About Tong
+  </div>
+
+  <h2 class="section-title">
+    未来を、つくる。
+  </h2>
+
+  <p class="section-description">
+
+    Tongは、
+    家族の中から始まるテクノロジープロジェクト。
+
+    Webサービス、AI、OS、アプリ、
+    ハードウェアなど、
+
+    幅広い技術をひとつの
+    エコシステムとしてつないでいく。
+
+  </p>
+
+
+  <div class="values-grid">
+
+    <div class="value-card">
+
+      <div class="value-icon">
+        🔒
+      </div>
+
+      <h3>
+        Privacy First
+      </h3>
+
+      <p>
+        プライバシーを最初から設計する。
+        必要以上のデータを集めず、
+        ユーザーの情報を大切に扱う。
+      </p>
+
+    </div>
+
+
+    <div class="value-card">
+
+      <div class="value-icon">
+        🛡️
+      </div>
+
+      <h3>
+        Security First
+      </h3>
+
+      <p>
+        セキュリティを後から追加するのではなく、
+        製品そのものの設計に組み込む。
+      </p>
+
+    </div>
+
+
+    <div class="value-card">
+
+      <div class="value-icon">
+        🆓
+      </div>
+
+      <h3>
+        Free
+      </h3>
+
+      <p>
+        Tongの基本サービスは無料。
+        広告やユーザーデータの販売に頼らない。
+      </p>
+
+    </div>
+
+
+    <div class="value-card">
+
+      <div class="value-icon">
+        🚀
+      </div>
+
+      <h3>
+        Future
+      </h3>
+
+      <p>
+        今日便利なものだけではなく、
+        10年後、20年後につながる技術をつくる。
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong data-count="40">0</strong>
+      <span>Products</span>
+    </div>
+
+    <div class="stat">
+      <strong data-count="8">0</strong>
+      <span>Technology Areas</span>
+    </div>
+
+    <div class="stat">
+      <strong data-count="1">0</strong>
+      <span>Ecosystem</span>
+    </div>
+
+    <div class="stat">
+      <strong>∞</strong>
+      <span>Ideas</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     NAME
+========================= -->
+
+<section class="name-section reveal">
+
+  <div class="section-label">
+    Why Tong?
+  </div>
+
+  <h2
+    class="section-title"
+    style="margin:auto;">
+
+    「Tong」には、<br>
+    意味がある。
+
+  </h2>
+
+
+  <div class="name-meaning">
+
+    <div class="meaning-card">
+
+      <div class="meaning-number">
+        01 / CATCH
+      </div>
+
+      <h3>
+        情報をつかむ。
+      </h3>
+
+      <p>
+        Search、Browser、AI、News、Cloud。
+        世界にある情報をつかみ、
+        必要なものをユーザーへ届ける。
+      </p>
+
+    </div>
+
+
+    <div class="meaning-card">
+
+      <div class="meaning-number">
+        02 / PROTECT
+      </div>
+
+      <h3>
+        脅威をつかみ取る。
+      </h3>
+
+      <p>
+        トングで危険なものを
+        つかみ取るように、
+        ウイルスや脅威から
+        ユーザーを守る。
+      </p>
+
+    </div>
+
+
+    <div class="meaning-card">
+
+      <div class="meaning-number">
+        03 / TOGETHER
+      </div>
+
+      <h3>
+        人と技術をつなぐ。
+      </h3>
+
+      <p>
+        家族から始まり、
+        ユーザー、開発者、
+        そして未来の技術をつなぐ。
+      </p>
+
+    </div>
+
+
+    <div class="meaning-card">
+
+      <div class="meaning-number">
+        04 / FUTURE
+      </div>
+
+      <h3>
+        未来をつかむ。
+      </h3>
+
+      <p>
+        今ある技術だけではなく、
+        まだ存在しない未来の製品まで
+        つくっていく。
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOUNDER
+========================= -->
+
+<section class="reveal">
+
+  <div class="founder">
+
+    <div class="founder-card">
+
+      <div class="founder-name">
+
+        <small>
+          Founder / Creator of Tong
+        </small>
+
+        <h3>
+          小山颯太
+        </h3>
+
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="section-label">
+        Founder
+      </div>
+
+      <h2 class="section-title">
+
+        小さな部屋から、<br>
+        未来をつくる。
+
+      </h2>
+
+      <p class="section-description">
+
+        Tongは、
+        巨大な企業から始まるのではない。
+
+        一人のアイデアから始まり、
+        家族と一緒に使い、
+        少しずつ技術を増やしていく。
+
+      </p>
+
+      <p class="section-description">
+
+        Webサービスから始まり、
+        AI、OS、スマートフォン、
+        PC、ロボットへ。
+
+        ひとつひとつを
+        未来につなげていく。
+
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SECURITY
+========================= -->
+
+<section
+  id="security"
+  class="reveal">
+
+  <div class="security-hero">
+
+    <div class="section-label">
+      Tong Security
+    </div>
+
+    <h2 class="section-title">
+      最初から、<br>
+      守る。
+    </h2>
+
+    <p class="section-description">
+
+      セキュリティソフトを
+      後から買わせるのではなく、
+
+      セキュリティそのものを
+      Tong製品の一部として設計する。
+
+    </p>
+
+
+    <div class="security-grid">
+
+      <div class="security-item">
+
+        <div>🔐</div>
+
+        <h3>
+          Encryption
+        </h3>
+
+        <p>
+          通信や保存データを適切に暗号化し、
+          対応サービスでは
+          エンドツーエンド暗号化を採用する。
+        </p>
+
+      </div>
+
+
+      <div class="security-item">
+
+        <div>🛡️</div>
+
+        <h3>
+          Security by Design
+        </h3>
+
+        <p>
+          セキュリティを後から
+          付け足すのではなく、
+          開発の最初から設計に組み込む。
+        </p>
+
+      </div>
+
+
+      <div class="security-item">
+
+        <div>🔄</div>
+
+        <h3>
+          10 Year Promise
+        </h3>
+
+        <p>
+          対象製品について、
+          最低10年間の
+          セキュリティアップデートを目指す。
+        </p>
+
+      </div>
+
+
+      <div class="security-item">
+
+        <div>🕵️</div>
+
+        <h3>
+          Leak Guard
+        </h3>
+
+        <p>
+          既知の漏えい情報などを
+          定期的に確認し、
+          問題が見つかった場合は
+          ユーザーへ通知する。
+        </p>
+
+      </div>
+
+
+      <div class="security-item">
+
+        <div>🚫</div>
+
+        <h3>
+          No Tracking Ads
+        </h3>
+
+        <p>
+          広告目的の追跡に依存しない。
+          ユーザーのプライバシーを優先する。
+        </p>
+
+      </div>
+
+
+      <div class="security-item">
+
+        <div>👤</div>
+
+        <h3>
+          User Control
+        </h3>
+
+        <p>
+          自分のデータを自分で管理できることを
+          Tongの重要な原則にする。
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section
+  id="products"
+  class="reveal">
+
+  <div class="section-label">
+    Tong Products
+  </div>
+
+  <h2 class="section-title">
+    すべてのTong。
+  </h2>
+
+  <p class="section-description">
+
+    ひとつのサービスではない。
+
+    毎日の生活から未来の
+    コンピューティングまで、
+
+    Tongのエコシステムをつくる。
+
+  </p>
+
+
+  <div class="product-toolbar">
+
+    <div class="filters">
+
+      <button
+        class="filter active"
+        data-category="all">
+        All
+      </button>
+
+      <button
+        class="filter"
+        data-category="web">
+        Web
+      </button>
+
+      <button
+        class="filter"
+        data-category="life">
+        Life
+      </button>
+
+      <button
+        class="filter"
+        data-category="creative">
+        Creative
+      </button>
+
+      <button
+        class="filter"
+        data-category="system">
+        System
+      </button>
+
+      <button
+        class="filter"
+        data-category="future">
+        Future
+      </button>
+
+    </div>
+
+
+    <input
+      class="search-box"
+      id="productSearch"
+      placeholder="Tong製品を検索…"
+      type="search">
+
+  </div>
+
+
+  <div
+    class="products-grid"
+    id="productsGrid">
+  </div>
+
+</section>
+
+
+<!-- =========================
+     TONG PHONE
+========================= -->
+
+<section
+  id="hardware"
+  class="phone-section reveal">
+
+  <div class="phone-intro">
+
+    <div class="section-label">
+      Tong Phone
+    </div>
+
+    <h2>
+      スマートフォンを、<br>
+      もっと自由に。
+    </h2>
+
+    <p>
+
+      Tong Phoneは、
+      「最初からセキュリティを考える」
+      というTongの思想を
+      スマートフォンそのものに組み込む
+      未来のデバイス。
+
+    </p>
+
+  </div>
+
+
+  <div class="phone-showcase">
+
+    <div class="phone-copy">
+
+      <div class="section-label">
+        Tong Phone
+      </div>
+
+      <h3>
+        Phone.
+      </h3>
+
+      <p>
+
+        広告なし。
+
+        プライバシーを重視し、
+        セキュリティ機能を
+        標準設計に組み込む。
+
+        Tong Account、
+        Tong Cloud、
+        Tong AI、
+        Tong OSなどと
+        シームレスにつながる
+        Tongの中心デバイス。
+
+      </p>
+
+
+      <div class="phone-features">
+
+        <div class="phone-feature">
+
+          <strong>
+            🔒 Privacy First
+          </strong>
+
+          <span>
+            データを必要以上に集めない
+            という考え方を
+            設計の中心に置く。
+          </span>
+
+        </div>
+
+
+        <div class="phone-feature">
+
+          <strong>
+            🛡️ Security Built-in
+          </strong>
+
+          <span>
+            セキュリティを
+            別途購入するのではなく、
+            本体の設計に組み込む。
+          </span>
+
+        </div>
+
+
+        <div class="phone-feature">
+
+          <strong>
+            🔄 Long Support
+          </strong>
+
+          <span>
+            対象製品では
+            最低10年間の
+            セキュリティアップデートを
+            目指す。
+          </span>
+
+        </div>
+
+
+        <div class="phone-feature">
+
+          <strong>
+            🚫 No Tracking Ads
+          </strong>
+
+          <span>
+            広告追跡を前提とした
+            ビジネスモデルに
+            依存しない。
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="phone">
+
+      <div class="phone-screen">
+        <span>T</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PHONE DETAIL -->
+
+  <div class="phone-detail-grid">
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        🔐
+      </div>
+
+      <h3>
+        プライバシー
+      </h3>
+
+      <p>
+
+        Tong Phoneでは、
+        ユーザーのデータを
+        できるだけユーザー自身が
+        コントロールできることを
+        目指す。
+
+        アプリごとの権限管理や
+        データ利用の透明性を
+        重視する。
+
+      </p>
+
+    </div>
+
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        🛡️
+      </div>
+
+      <h3>
+        セキュリティ
+      </h3>
+
+      <p>
+
+        OS、アプリ、通信、
+        アカウントなど
+        複数の層でセキュリティを考える。
+
+        セキュリティ機能を
+        「追加オプション」にせず、
+        基本設計に含める。
+
+      </p>
+
+    </div>
+
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        🔄
+      </div>
+
+      <h3>
+        長期アップデート
+      </h3>
+
+      <p>
+
+        スマートフォンを
+        数年で使い捨てるのではなく、
+
+        対象製品について
+        最低10年間の
+        セキュリティアップデートを
+        目指す。
+
+      </p>
+
+    </div>
+
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        ☁️
+      </div>
+
+      <h3>
+        Tong Cloud
+      </h3>
+
+      <p>
+
+        Photos、Files、Notes、
+        DocumentsなどのTongサービスと
+        Phoneを連携。
+
+        複数のデバイスから
+        必要なデータへアクセスできる
+        エコシステムを目指す。
+
+      </p>
+
+    </div>
+
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        🤖
+      </div>
+
+      <h3>
+        Tong AI
+      </h3>
+
+      <p>
+
+        Tong AIを
+        Phoneの中核機能のひとつへ。
+
+        文章作成、検索、
+        スケジュール管理、
+        翻訳、画像理解など、
+        日常の作業を支援する。
+
+      </p>
+
+    </div>
+
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        ⚡
+      </div>
+
+      <h3>
+        Tong OS
+      </h3>
+
+      <p>
+
+        Tong Phone専用の
+        Tong OSを構想。
+
+        ハードウェアとソフトウェアを
+        一体として設計することで、
+        Tongのサービスを
+        より深く統合する。
+
+      </p>
+
+    </div>
+
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        📡
+      </div>
+
+      <h3>
+        通信
+      </h3>
+
+      <p>
+
+        Tong Messageなどの
+        対応サービスでは、
+        エンドツーエンド暗号化を
+        利用できる設計を目指す。
+
+        通信内容を
+        不必要に第三者へ
+        見せないことを重視する。
+
+      </p>
+
+    </div>
+
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        🕵️
+      </div>
+
+      <h3>
+        Leak Guard
+      </h3>
+
+      <p>
+
+        ユーザーに関係する
+        既知の漏えい情報などを
+        定期的に確認する仕組みを構想。
+
+        問題が確認された場合には
+        通知し、
+        パスワード変更などの
+        対応を案内する。
+
+      </p>
+
+    </div>
+
+
+    <div class="phone-detail-card">
+
+      <div class="phone-detail-icon">
+        🆓
+      </div>
+
+      <h3>
+        基本機能を無料に
+      </h3>
+
+      <p>
+
+        Tongの基本サービスは無料。
+
+        セキュリティや
+        プライバシーを守るための
+        基本機能を、
+        最初から使える状態にする
+        ことを目指す。
+
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- PHONE PRINCIPLES -->
+
+  <div class="phone-principles">
+
+    <div class="section-label">
+      Tong Phone Principles
+    </div>
+
+    <h2 class="section-title">
+      Phoneを売るだけじゃない。
+    </h2>
+
+
+    <div class="principle-row">
+
+      <strong>
+        01 — Privacy
+      </strong>
+
+      <p>
+        ユーザーのプライバシーを
+        製品設計の重要な要素として扱う。
+        データ収集は必要性と目的を明確にする。
+      </p>
+
+    </div>
+
+
+    <div class="principle-row">
+
+      <strong>
+        02 — Security
+      </strong>
+
+      <p>
+        セキュリティを
+        後から追加するのではなく、
+        ハードウェア、OS、アプリ、
+        通信など各層で考える。
+      </p>
+
+    </div>
+
+
+    <div class="principle-row">
+
+      <strong>
+        03 — Longevity
+      </strong>
+
+      <p>
+        長く使える製品を目指す。
+        対象製品について、
+        最低10年間のセキュリティアップデートを
+        目指す。
+      </p>
+
+    </div>
+
+
+    <div class="principle-row">
+
+      <strong>
+        04 — No Ads
+      </strong>
+
+      <p>
+        基本的なTong体験を
+        広告表示で埋め尽くさない。
+        広告追跡を前提とした
+        ビジネスモデルに依存しない。
+      </p>
+
+    </div>
+
+
+    <div class="principle-row">
+
+      <strong>
+        05 — Ecosystem
+      </strong>
+
+      <p>
+        Phoneだけで完結するのではなく、
+        Tong PC、Tong OS、Tong Cloud、
+        Tong AI、Tong Robotなどと
+        ひとつのエコシステムを形成する。
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     OS
+========================= -->
+
+<section class="reveal">
+
+  <div class="section-label">
+    Tong OS
+  </div>
+
+  <h2 class="section-title">
+    OSも、Tongから。
+  </h2>
+
+  <p class="section-description">
+
+    Tongの世界を支える基盤。
+
+    Phone、PC、Tablet、Robotなど、
+    デバイスごとに最適化された
+    OSファミリーを構想する。
+
+  </p>
+
+
+  <div class="os-window">
+
+    <div class="os-top">
+
+      <span class="window-dot"></span>
+      <span class="window-dot"></span>
+      <span class="window-dot"></span>
+
+    </div>
+
+
+    <div class="os-body">
+
+      <div class="os-sidebar">
+
+        <div>
+          ⌂ Home
+        </div>
+
+        <div>
+          📁 Files
+        </div>
+
+        <div>
+          📝 Notes
+        </div>
+
+        <div>
+          🤖 AI
+        </div>
+
+        <div>
+          ⚙ Settings
+        </div>
+
+      </div>
+
+
+      <div class="os-content">
+
+        <h3>
+          Welcome to Tong.
+        </h3>
+
+        <p>
+          Privacy. Security. Future.
+        </p>
+
+
+        <div class="os-cards">
+
+          <div class="os-mini">
+            📝
+            <br><br>
+            Notes
+          </div>
+
+          <div class="os-mini">
+            ☁️
+            <br><br>
+            Cloud
+          </div>
+
+          <div class="os-mini">
+            🤖
+            <br><br>
+            Tong AI
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     AI
+========================= -->
+
+<section
+  id="ai"
+  class="reveal">
+
+  <div class="section-label">
+    Tong AI
+  </div>
+
+  <h2 class="section-title">
+    AIを、もっと身近に。
+  </h2>
+
+  <p class="section-description">
+
+    Tong AIは
+    TongエコシステムのAIアシスタント。
+
+    将来的にはTong LLMを中心に、
+    文章・画像・音声・コードなどを扱う。
+
+  </p>
+
+
+  <div class="ai-box">
+
+    <div class="ai-response">
+
+      <div class="ai-label">
+        TONG AI
+      </div>
+
+      <div
+        class="ai-output"
+        id="aiOutput">
+
+        こんにちは。
+        Tong AIです。<br>
+        何を一緒につくろう？
+
+      </div>
+
+    </div>
+
+
+    <div class="ai-input-row">
+
+      <input
+        class="ai-input"
+        id="aiInput"
+        placeholder="Tong AIに聞いてみる…">
+
+      <button
+        class="btn btn-primary"
+        onclick="askAI()">
+
+        送信
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CLOUD
+========================= -->
+
+<section class="reveal">
+
+  <div class="section-label">
+    Tong Cloud
+  </div>
+
+  <h2 class="section-title">
+
+    あなたのデータを、<br>
+    あなたのものに。
+
+  </h2>
+
+  <p class="section-description">
+
+    Notes、Files、Photos、
+    Documentsなどを
+    Tong Cloudにつなげる。
+
+    プライバシーを重視し、
+    必要以上のデータ利用をしない。
+
+  </p>
+
+</section>
+
+
+<!-- =========================
+     STORE
+========================= -->
+
+<section class="reveal">
+
+  <div class="store">
+
+    <div class="section-label">
+      Tong Store
+    </div>
+
+    <div class="store-sign">
+      Tong Store
+    </div>
+
+    <p class="store-sub">
+      Tongの未来を体験する場所。
+    </p>
+
+
+    <div class="store-items">
+
+      <div class="store-item">
+
+        <div style="font-size:38px;">
+          💻
+        </div>
+
+        <h3>
+          Tong PC
+        </h3>
+
+        <p>
+          Tong OSとTongのサービスを
+          中心にしたコンピューター。
+        </p>
+
+      </div>
+
+
+      <div class="store-item">
+
+        <div style="font-size:38px;">
+          📱
+        </div>
+
+        <h3>
+          Tong Phone
+        </h3>
+
+        <p>
+          プライバシーとセキュリティを
+          中心に設計するスマートフォン。
+        </p>
+
+      </div>
+
+
+      <div class="store-item">
+
+        <div style="font-size:38px;">
+          🤖
+        </div>
+
+        <h3>
+          Tong Robot
+        </h3>
+
+        <p>
+          Tong AIとロボティクスを
+          組み合わせた未来のデバイス。
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ROADMAP
+========================= -->
+
+<section
+  id="future"
+  class="reveal">
+
+  <div class="section-label">
+    Future
+  </div>
+
+  <h2 class="section-title">
+    まだ、始まったばかり。
+  </h2>
+
+  <p class="section-description">
+    Tongの未来は、
+    ひとつの製品で終わらない。
+  </p>
+
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+
+      <span>
+        NOW
+      </span>
+
+      <h3>
+        Tong Web
+      </h3>
+
+      <p>
+        Notes、Files、Account、
+        Mailなど、
+        Tongの基本サービスをつくる。
+      </p>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+      <span>
+        NEXT
+      </span>
+
+      <h3>
+        Tong Apps
+      </h3>
+
+      <p>
+        Android、iPhone、PCなどへ
+        Tongサービスを広げる。
+      </p>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+      <span>
+        FUTURE
+      </span>
+
+      <h3>
+        Tong AI / LLM
+      </h3>
+
+      <p>
+        Tong独自のAI・LLMを
+        研究・開発する。
+      </p>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+      <span>
+        FUTURE
+      </span>
+
+      <h3>
+        Tong OS
+      </h3>
+
+      <p>
+        Tongのハードウェアを
+        支えるOSを開発する。
+      </p>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+      <span>
+        FUTURE
+      </span>
+
+      <h3>
+        Tong Hardware
+      </h3>
+
+      <p>
+        Phone、PC、Tablet、
+        Watch、Robotなどへ展開する。
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     DEVELOPER
+========================= -->
+
+<section class="reveal">
+
+  <div class="section-label">
+    Tong Developer
+  </div>
+
+  <h2 class="section-title">
+    つくる人にも、Tong。
+  </h2>
+
+  <p class="section-description">
+
+    将来的にはTong SDK、
+    Tong API、Tong Developerなどを提供し、
+
+    Tongの技術を使って
+    新しいアプリやサービスを
+    つくれる環境を目指す。
+
+  </p>
+
+
+  <div class="dev-grid">
+
+    <div class="dev-card">
+
+      <div style="font-size:32px;">
+        ⌨️
+      </div>
+
+      <h3>
+        Tong Developer
+      </h3>
+
+      <p>
+        Tong向けアプリやサービスを
+        開発するための開発環境。
+      </p>
+
+    </div>
+
+
+    <div class="dev-card">
+
+      <div style="font-size:32px;">
+        🔌
+      </div>
+
+      <h3>
+        Tong API
+      </h3>
+
+      <p>
+        Tongのサービスと
+        外部アプリケーションを
+        つなぐAPI。
+      </p>
+
+    </div>
+
+
+    <div class="dev-card">
+
+      <div style="font-size:32px;">
+        🧰
+      </div>
+
+      <h3>
+        Tong SDK
+      </h3>
+
+      <p>
+        Tongプラットフォーム向けの
+        開発キット。
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="footer-top">
+
+    <div>
+
+      <div class="footer-brand">
+        Tong
+      </div>
+
+      <p class="footer-description">
+
+        すべてをつかみ、
+        未来を守る。<br>
+
+        Privacy First.
+        Security First.
+
+      </p>
+
+    </div>
+
+
+    <div class="footer-col">
+
+      <h4>
+        Explore
+      </h4>
+
+      <a href="#about">
+        About
+      </a>
+
+      <a href="#products">
+        Products
+      </a>
+
+      <a href="#security">
+        Security
+      </a>
+
+      <a href="#future">
+        Future
+      </a>
+
+    </div>
+
+
+    <div class="footer-col">
+
+      <h4>
+        Technology
+      </h4>
+
+      <a href="#ai">
+        Tong AI
+      </a>
+
+      <a href="#hardware">
+        Tong Phone
+      </a>
+
+      <a href="#">
+        Tong OS
+      </a>
+
+      <a href="#">
+        Tong Cloud
+      </a>
+
+    </div>
+
+
+    <div class="footer-col">
+
+      <h4>
+        Tong
+      </h4>
+
+      <a href="#">
+        Store
+      </a>
+
+      <a href="#">
+        Developer
+      </a>
+
+      <a href="#">
+        Privacy
+      </a>
+
+      <a href="#">
+        Security
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      ©
+      <span id="year"></span>
+      Tong
+    </span>
+
+    <span>
+      Created by 小山颯太
+    </span>
+
+  </div>
+
+</footer>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+  class="modal"
+  id="productModal">
+
+  <div class="modal-card">
+
+    <button
+      class="icon-btn modal-close"
+      onclick="closeModal()">
+
+      ×
+
+    </button>
+
+    <div
+      class="modal-icon"
+      id="modalIcon">
+      📦
+    </div>
+
+    <h2 id="modalTitle">
+      Product
+    </h2>
+
+    <p id="modalDescription"></p>
+
+    <div class="modal-meta">
+
+      <span id="modalCategory">
+        Category
+      </span>
+
+      <span>
+        Free
+      </span>
+
+      <span>
+        Privacy First
+      </span>
+
+      <span>
+        Security First
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   PRODUCT DATABASE
+========================= */
+
+const products = [
+
+{
+name:"Tong Browser",
+icon:"🌐",
+category:"web",
+description:"プライバシーを重視したTongのWebブラウザ。"
+},
+
+{
+name:"Tong Search",
+icon:"🔎",
+category:"web",
+description:"必要な情報をすばやく見つける検索サービス。"
+},
+
+{
+name:"Tong Maps",
+icon:"🗺️",
+category:"web",
+description:"地図・場所・ルートを扱うTongのマップサービス。"
+},
+
+{
+name:"Tong Mail",
+icon:"✉️",
+category:"web",
+description:"プライバシーを重視したメールサービス。"
+},
+
+{
+name:"Tong Message",
+icon:"💬",
+category:"web",
+description:"安全なメッセージングサービス。対応通信ではE2EEを採用する。"
+},
+
+{
+name:"Tong Meet",
+icon:"📞",
+category:"web",
+description:"Tongのビデオ通話サービス。"
+},
+
+{
+name:"Tong News",
+icon:"📰",
+category:"web",
+description:"ニュースや情報を集めるTongサービス。"
+},
+
+{
+name:"Tong Weather",
+icon:"☁️",
+category:"life",
+description:"天気予報を見るためのTongサービス。"
+},
+
+{
+name:"Tong Notes",
+icon:"📝",
+category:"life",
+description:"メモを作成・編集・検索・保存できるTong Notes。"
+},
+
+{
+name:"Tong Files",
+icon:"📁",
+category:"life",
+description:"ファイルを安全に管理するサービス。"
+},
+
+{
+name:"Tong Calendar",
+icon:"📅",
+category:"life",
+description:"予定を管理するカレンダー。"
+},
+
+{
+name:"Tong Tasks",
+icon:"☑️",
+category:"life",
+description:"タスクを管理するTongサービス。"
+},
+
+{
+name:"Tong Reminders",
+icon:"🔔",
+category:"life",
+description:"忘れたくないことを管理するリマインダー。"
+},
+
+{
+name:"Tong Contacts",
+icon:"👥",
+category:"life",
+description:"連絡先を管理するサービス。"
+},
+
+{
+name:"Tong Journal",
+icon:"📔",
+category:"life",
+description:"日々の記録を書くためのプライベートジャーナル。"
+},
+
+{
+name:"Tong Documents",
+icon:"📄",
+category:"creative",
+description:"文書を作成・編集するTongサービス。"
+},
+
+{
+name:"Tong Sheets",
+icon:"📊",
+category:"creative",
+description:"表計算・データ管理サービス。"
+},
+
+{
+name:"Tong Slides",
+icon:"📽️",
+category:"creative",
+description:"プレゼンテーションを作成するサービス。"
+},
+
+{
+name:"Tong Photos",
+icon:"📷",
+category:"creative",
+description:"写真を管理するTong Photos。"
+},
+
+{
+name:"Tong Music",
+icon:"🎵",
+category:"creative",
+description:"音楽を楽しむTongサービス。"
+},
+
+{
+name:"Tong Video",
+icon:"🎬",
+category:"creative",
+description:"動画を楽しみ、管理するサービス。"
+},
+
+{
+name:"Tong Books",
+icon:"📚",
+category:"creative",
+description:"本・電子書籍を扱うTongサービス。"
+},
+
+{
+name:"Tong Studio",
+icon:"🎨",
+category:"creative",
+description:"クリエイター向けの制作環境。"
+},
+
+{
+name:"Tong Draw",
+icon:"🖌️",
+category:"creative",
+description:"イラストや図を作成するサービス。"
+},
+
+{
+name:"Tong Account",
+icon:"👤",
+category:"system",
+description:"Tongサービスをつなぐ共通アカウント。"
+},
+
+{
+name:"Tong Cloud",
+icon:"☁️",
+category:"system",
+description:"Tongサービスのデータをつなぐクラウド基盤。"
+},
+
+{
+name:"Tong Drive",
+icon:"💾",
+category:"system",
+description:"ファイル同期・管理サービス。"
+},
+
+{
+name:"Tong Backup",
+icon:"🗄️",
+category:"system",
+description:"データを安全にバックアップするサービス。"
+},
+
+{
+name:"Tong Passwords",
+icon:"🔑",
+category:"system",
+description:"パスワードを安全に管理するサービス。"
+},
+
+{
+name:"Tong Find",
+icon:"📍",
+category:"system",
+description:"Tongデバイスを探すためのサービス。"
+},
+
+{
+name:"Tong OS",
+icon:"💻",
+category:"system",
+description:"Tongエコシステムを支えるOSプラットフォーム。"
+},
+
+{
+name:"Tong AI",
+icon:"🤖",
+category:"future",
+description:"TongのAIアシスタント。"
+},
+
+{
+name:"Tong LLM",
+icon:"🧠",
+category:"future",
+description:"Tong独自の大規模言語モデルを目指す研究プロジェクト。"
+},
+
+{
+name:"Tong Vision",
+icon:"👁️",
+category:"future",
+description:"画像・視覚を扱うAI技術。"
+},
+
+{
+name:"Tong Voice",
+icon:"🎙️",
+category:"future",
+description:"音声AI技術。"
+},
+
+{
+name:"Tong Code",
+icon:"⌨️",
+category:"future",
+description:"AIによるプログラミング支援。"
+},
+
+{
+name:"Tong Phone",
+icon:"📱",
+category:"future",
+description:"プライバシーとセキュリティを中心に設計するTongスマートフォン。"
+},
+
+{
+name:"Tong PC",
+icon:"🖥️",
+category:"future",
+description:"Tong OSを中心としたTong PC。"
+},
+
+{
+name:"Tong Tablet",
+icon:"📱",
+category:"future",
+description:"Tongのタブレットコンピューター。"
+},
+
+{
+name:"Tong Watch",
+icon:"⌚",
+category:"future",
+description:"Tongのウェアラブルデバイス。"
+},
+
+{
+name:"Tong Robot",
+icon:"🤖",
+category:"future",
+description:"Tong AIとロボティクスを組み合わせた未来のロボット。"
+},
+
+{
+name:"Tong Developer",
+icon:"🧑‍💻",
+category:"future",
+description:"Tong向け開発環境。"
+},
+
+{
+name:"Tong SDK",
+icon:"🧰",
+category:"future",
+description:"Tongアプリを開発するためのSDK。"
+},
+
+{
+name:"Tong API",
+icon:"🔌",
+category:"future",
+description:"Tongサービスを外部アプリと接続するAPI。"
+},
+
+{
+name:"Tong App Store",
+icon:"🏪",
+category:"future",
+description:"Tongアプリを提供するストア。"
+}
+
+];
+
+
+/* =========================
+   PRODUCT RENDER
+========================= */
+
+const productsGrid =
+document.getElementById(
+  "productsGrid"
+);
+
+const searchInput =
+document.getElementById(
+  "productSearch"
+);
+
+let currentCategory="all";
+
+
+function renderProducts(){
+
+  const query =
+    searchInput.value
+      .toLowerCase()
+      .trim();
+
+
+  const filtered =
+    products.filter(product=>{
+
+      const categoryMatch =
+        currentCategory==="all" ||
+        product.category===currentCategory;
+
+
+      const searchMatch =
+        product.name
+          .toLowerCase()
+          .includes(query)
+        ||
+        product.description
+          .toLowerCase()
+          .includes(query);
+
+
+      return (
+        categoryMatch &&
+        searchMatch
+      );
+
+    });
+
+
+  productsGrid.innerHTML="";
+
+
+  if(filtered.length===0){
+
+    productsGrid.innerHTML=`
+
+      <div
+        style="
+        grid-column:1/-1;
+        padding:70px;
+        text-align:center;
+        color:var(--muted);
+        border:1px solid var(--line);
+        border-radius:25px;
+        ">
+
+        該当するTong製品がありません。
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  filtered.forEach(product=>{
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "product-card";
+
+
+    card.innerHTML=`
+
+      <div class="product-tag">
+        ${product.category}
+      </div>
+
+      <div class="product-icon">
+        ${product.icon}
+      </div>
+
+      <h3>
+        ${product.name}
+      </h3>
+
+      <p>
+        ${product.description}
+      </p>
+
+    `;
+
+
+    card.addEventListener(
+      "click",
+      ()=>{
+        openProduct(product);
+      }
+    );
+
+
+    productsGrid.appendChild(card);
+
+  });
+
+}
+
+
+document
+  .querySelectorAll(".filter")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        document
+          .querySelectorAll(".filter")
+          .forEach(btn=>{
+            btn.classList.remove(
+              "active"
+            );
+          });
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        currentCategory =
+          button.dataset.category;
+
+
+        renderProducts();
+
+      }
+    );
+
+  });
+
+
+searchInput.addEventListener(
+  "input",
+  renderProducts
+);
+
+
+/* =========================
+   MODAL
+========================= */
+
+const modal =
+  document.getElementById(
+    "productModal"
+  );
+
+
+function openProduct(product){
+
+  document.getElementById(
+    "modalIcon"
+  ).textContent =
+    product.icon;
+
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    product.name;
+
+
+  document.getElementById(
+    "modalDescription"
+  ).textContent =
+    product.description;
+
+
+  document.getElementById(
+    "modalCategory"
+  ).textContent =
+    product.category;
+
+
+  modal.classList.add(
+    "show"
+  );
+
+}
+
+
+function openProductByName(name){
+
+  const product =
+    products.find(
+      p=>p.name===name
+    );
+
+
+  if(product){
+    openProduct(product);
+  }
+
+}
+
+
+function closeModal(){
+
+  modal.classList.remove(
+    "show"
+  );
+
+}
+
+
+modal.addEventListener(
+  "click",
+  event=>{
+
+    if(
+      event.target===modal
+    ){
+      closeModal();
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key==="Escape"
+    ){
+      closeModal();
+    }
+
+
+    if(
+      event.key==="/"
+    ){
+
+      event.preventDefault();
+
+      searchInput.focus();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   AI DEMO
+========================= */
+
+function askAI(){
+
+  const input =
+    document.getElementById(
+      "aiInput"
+    );
+
+  const output =
+    document.getElementById(
+      "aiOutput"
+    );
+
+
+  const text =
+    input.value.trim();
+
+
+  if(!text){
+
+    output.innerHTML =
+      "何か質問を入力してみてください。";
+
+    return;
+
+  }
+
+
+  output.innerHTML =
+    "考えています…";
+
+
+  setTimeout(()=>{
+
+    const lower =
+      text.toLowerCase();
+
+
+    if(
+      lower.includes("tong") ||
+      lower.includes("トング")
+    ){
+
+      output.innerHTML =
+        "Tongは、すべてをつかみ、未来を守るためのテクノロジープロジェクトです。";
+
+    }
+
+    else if(
+      lower.includes("privacy") ||
+      lower.includes("プライバシー")
+    ){
+
+      output.innerHTML =
+        "Tongはプライバシーを重要な設計原則として考えています。";
+
+    }
+
+    else if(
+      lower.includes("security") ||
+      lower.includes("セキュリティ")
+    ){
+
+      output.innerHTML =
+        "Tongでは、セキュリティを後付けではなく、最初から設計することを目指します。";
+
+    }
+
+    else if(
+      lower.includes("phone") ||
+      lower.includes("スマホ") ||
+      lower.includes("スマートフォン")
+    ){
+
+      output.innerHTML =
+        "Tong Phoneは、Privacy FirstとSecurity Firstを中心に設計する未来のスマートフォンです。";
+
+    }
+
+    else{
+
+      output.innerHTML =
+        "Tong AIの未来の機能です。現在はデモとして動作しています。";
+
+    }
+
+  },700);
+
+}
+
+
+document
+  .getElementById("aiInput")
+  .addEventListener(
+    "keydown",
+    event=>{
+
+      if(
+        event.key==="Enter"
+      ){
+
+        askAI();
+
+      }
+
+    }
+  );
+
+
+/* =========================
+   THEME
+========================= */
+
+const themeBtn =
+  document.getElementById(
+    "themeBtn"
+  );
+
+
+themeBtn.addEventListener(
+  "click",
+  ()=>{
+
+    document.body
+      .classList
+      .toggle("light");
+
+
+    const light =
+      document.body
+        .classList
+        .contains("light");
+
+
+    localStorage.setItem(
+      "tong-theme",
+      light
+        ? "light"
+        : "dark"
+    );
+
+
+    themeBtn.textContent =
+      light
+        ? "☾"
+        : "☼";
+
+  }
+);
+
+
+const savedTheme =
+  localStorage.getItem(
+    "tong-theme"
+  );
+
+
+if(
+  savedTheme==="light"
+){
+
+  document.body
+    .classList
+    .add("light");
+
+  themeBtn.textContent="☾";
+
+}
+
+
+/* =========================
+   SCROLL
+========================= */
+
+function scrollToSection(id){
+
+  document
+    .getElementById(id)
+    ?.scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   REVEAL
+========================= */
+
+const revealObserver =
+  new IntersectionObserver(
+    entries=>{
+
+      entries.forEach(
+        entry=>{
+
+          if(
+            entry.isIntersecting
+          ){
+
+            entry.target
+              .classList
+              .add("visible");
+
+          }
+
+        }
+      );
+
+    },
+    {
+      threshold:.12
+    }
+  );
+
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(
+    el=>
+      revealObserver.observe(el)
+  );
+
+
+/* =========================
+   COUNTERS
+========================= */
+
+let countersStarted=false;
+
+
+const statsSection =
+  document.querySelector(
+    ".stats"
+  );
+
+
+const counterObserver =
+  new IntersectionObserver(
+    entries=>{
+
+      if(
+        entries[0].isIntersecting &&
+        !countersStarted
+      ){
+
+        countersStarted=true;
+
+
+        document
+          .querySelectorAll(
+            "[data-count]"
+          )
+          .forEach(counter=>{
+
+            const target =
+              Number(
+                counter.dataset.count
+              );
+
+
+            let value=0;
+
+
+            const step =
+              Math.max(
+                1,
+                Math.ceil(
+                  target/35
+                )
+              );
+
+
+            const timer =
+              setInterval(()=>{
+
+                value+=step;
+
+
+                if(
+                  value>=target
+                ){
+
+                  value=target;
+
+                  clearInterval(
+                    timer
+                  );
+
+                }
+
+
+                counter.textContent =
+                  value;
+
+              },30);
+
+          });
+
+      }
+
+    }
+  );
+
+
+counterObserver.observe(
+  statsSection
+);
+
+
+/* =========================
+   PRODUCT TILT
+========================= */
+
+document.addEventListener(
+  "mousemove",
+  event=>{
+
+    const card =
+      event.target.closest(
+        ".product-card"
+      );
+
+
+    if(!card)return;
+
+
+    const rect =
+      card.getBoundingClientRect();
+
+
+    const x =
+      event.clientX -
+      rect.left;
+
+
+    const y =
+      event.clientY -
+      rect.top;
+
+
+    const rotateX =
+      ((y/rect.height)-.5)*-5;
+
+
+    const rotateY =
+      ((x/rect.width)-.5)*5;
+
+
+    card.style.transform =
+      `perspective(700px)
+       rotateX(${rotateX}deg)
+       rotateY(${rotateY}deg)
+       translateY(-7px)`;
+
+  }
+);
+
+
+document.addEventListener(
+  "mouseout",
+  event=>{
+
+    const card =
+      event.target.closest(
+        ".product-card"
+      );
+
+
+    if(card){
+
+      card.style.transform="";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   YEAR
+========================= */
+
+document.getElementById(
+  "year"
+).textContent =
+  new Date().getFullYear();
+
+
+/* =========================
+   LOADER
+========================= */
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+    setTimeout(
+      ()=>{
+
+        document
+          .getElementById("loader")
+          .classList
+          .add("hide");
+
+      },
+      700
+    );
+
+  }
+);
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
